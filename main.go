@@ -74,6 +74,10 @@ func main() {
 
 	// TODO can be different events based on Payload.Action
 	for _, e := range events {
+		if e.Actor.Login == "dependabot[bot]" {
+			continue
+		}
+
 		switch e.Type {
 		case "CreateEvent":
 			switch e.Payload.RefType {
