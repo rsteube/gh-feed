@@ -1,6 +1,6 @@
 module github.com/rsteube/gh-feed
 
-go 1.21.0
+go 1.21
 
 require github.com/cli/go-gh/v2 v2.3.0
 
