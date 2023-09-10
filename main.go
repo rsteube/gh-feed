@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/charmbracelet/lipgloss"
 	"github.com/cli/go-gh/v2/pkg/api"
 )
 
@@ -64,22 +65,40 @@ func main() {
 	for _, e := range events {
 		switch e.Type {
 		case "CreateEvent":
-			fmt.Printf("%v created %v %v on %v\n", e.Actor.Login, e.Payload.RefType, e.Payload.Ref, e.Repo.Name)
+			fmt.Printf("%v %v %v %v on %v\n", e.Actor.Login, format("created"), e.Payload.RefType, faint(e.Payload.Ref), e.Repo.Name)
 		case "DeleteEvent":
-			fmt.Printf("%v deleted %v %v from %v\n", e.Actor.Login, e.Payload.RefType, e.Payload.Ref, e.Repo.Name)
+			fmt.Printf("%v %v %v %v from %v\n", e.Actor.Login, format("deleted"), e.Payload.RefType, faint(e.Payload.Ref), e.Repo.Name)
 		case "ForkEvent":
-			fmt.Printf("%v forked %v from %v\n", e.Actor.Login, e.Payload.Forkee.FullName, e.Repo.Name)
+			fmt.Printf("%v %v %v from %v\n", e.Actor.Login, format("forked"), e.Payload.Forkee.FullName, e.Repo.Name)
 		case "WatchEvent":
-			fmt.Printf("%v starred %v\n", e.Actor.Login, e.Repo.Name)
+			fmt.Printf("%v %v %v\n", e.Actor.Login, format("starred"), e.Repo.Name) // TODO might not be a starred event
 		case "PushEvent":
-			fmt.Printf("%v pushed to %v\n", e.Actor.Login, e.Repo.Name)
+			fmt.Printf("%v %v to %v\n", e.Actor.Login, format("pushed"), e.Repo.Name)
 		case "IssueCommentEvent":
-			fmt.Printf("%v commented issue %v \"%v\" on %v\n", e.Actor.Login, e.Payload.Issue.Number, e.Payload.Issue.Title, e.Repo.Name)
+			fmt.Printf("%v %v issue %v \"%v\" on %v\n", e.Actor.Login, format("commented"), e.Payload.Issue.Number, faint(e.Payload.Issue.Title), e.Repo.Name)
 			// fmt.Printf("%v\n", e.Payload.Comment.Body) // TODO limit and format markdown
 		case "PullRequestEvent":
-			fmt.Printf("%v %v pull request %v \"%v\" on %v\n", e.Actor.Login, e.Payload.Action, e.Payload.PullRequest.Number, e.Payload.PullRequest.Title, e.Repo.Name)
+			fmt.Printf("%v %v pull request %v \"%v\" on %v\n", e.Actor.Login, format(e.Payload.Action), e.Payload.PullRequest.Number, faint(e.Payload.PullRequest.Title), e.Repo.Name)
 		default:
 			fmt.Printf("unknown event %#v\n", e.Type)
 		}
 	}
+}
+
+func faint(s string) string {
+	return lipgloss.NewStyle().Faint(true).Render(s)
+}
+
+func format(s string) string {
+	color := map[string]string{
+		"closed":    "1",
+		"commented": "9",
+		"created":   "4",
+		"deleted":   "1",
+		"forked":    "5",
+		"opened":    "2",
+		"pushed":    "6",
+		"starred":   "3",
+	}[s]
+	return lipgloss.NewStyle().Foreground(lipgloss.Color(color)).Render(s)
 }
