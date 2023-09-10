@@ -66,7 +66,7 @@ func main() {
 	}
 
 	var events []event
-	err = client.Get(fmt.Sprintf("users/%v/received_events", login.Login), &events)
+	err = client.Get(fmt.Sprintf("users/%v/received_events?per_page=100", login.Login), &events)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -76,7 +76,14 @@ func main() {
 	for _, e := range events {
 		switch e.Type {
 		case "CreateEvent":
-			fmt.Printf("%v %v %v %v on %v\n", e.FormatActor(), format("created"), e.Payload.RefType, faint(e.Payload.Ref), e.Repo.Name)
+			switch e.Payload.RefType {
+			case "repository":
+				fmt.Printf("%v %v %v %v\n", e.FormatActor(), format("created"), e.Payload.RefType, e.Repo.Name)
+			case "branch":
+				fmt.Printf("%v %v %v %v on %v\n", e.FormatActor(), format("created"), e.Payload.RefType, faint(e.Payload.Ref), e.Repo.Name)
+			default:
+				fmt.Printf("unknown reftype %#v\n", e.Payload.RefType)
+			}
 		case "DeleteEvent":
 			fmt.Printf("%v %v %v %v from %v\n", e.FormatActor(), format("deleted"), e.Payload.RefType, faint(e.Payload.Ref), e.Repo.Name)
 		case "ForkEvent":
