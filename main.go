@@ -66,24 +66,14 @@ func main() {
 	}
 
 	var events []event
-	err = client.Get(fmt.Sprintf("users/%v/received_events?per_page=100", login.Login), &events)
+	err = client.Get(fmt.Sprintf("users/%v/received_events", login.Login), &events)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
 
-	filtered := make([]event, 0, len(events))
-	for _, e := range events {
-		if e.Actor.Login != "dependabot[bot]" {
-			filtered = append(filtered, e)
-		}
-	}
-	if len(filtered) > 40 {
-		filtered = filtered[:40]
-	}
-
 	// TODO can be different events based on Payload.Action
-	for _, e := range filtered {
+	for _, e := range events {
 		switch e.Type {
 		case "CreateEvent":
 			switch e.Payload.RefType {
