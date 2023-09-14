@@ -88,6 +88,8 @@ func main() {
 			fmt.Printf("%v %v %v %v from %v\n", e.FormatActor(), format("deleted"), e.Payload.RefType, faint(e.Payload.Ref), e.Repo.Name)
 		case "ForkEvent":
 			fmt.Printf("%v %v %v from %v\n", e.FormatActor(), format("forked"), e.Payload.Forkee.FullName, e.Repo.Name)
+		case "IssuesEvent":
+			fmt.Printf("%v %v issue %v \"%v\" on %v\n", e.FormatActor(), format(e.Payload.Action), e.Payload.Issue.Number, faint(e.Payload.Issue.Title), e.Repo.Name)
 		case "IssueCommentEvent":
 			fmt.Printf("%v %v issue %v \"%v\" on %v\n", e.FormatActor(), format("commented"), e.Payload.Issue.Number, faint(e.Payload.Issue.Title), e.Repo.Name)
 			// fmt.Printf("%v\n", e.Payload.Comment.Body) // TODO limit and format markdown
