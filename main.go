@@ -29,10 +29,16 @@ type event struct {
 			Number int
 			Title  string
 		}
+		Member struct {
+			Login string
+		}
 		PullRequest struct {
 			Number int
 			Title  string
 		} `json:"pull_request"`
+		Repo struct {
+			Name string
+		}
 		Comment struct {
 			Body string
 		}
@@ -93,6 +99,8 @@ func main() {
 		case "IssueCommentEvent":
 			fmt.Printf("%v %v issue %v \"%v\" on %v\n", e.FormatActor(), format("commented"), e.Payload.Issue.Number, faint(e.Payload.Issue.Title), e.Repo.Name)
 			// fmt.Printf("%v\n", e.Payload.Comment.Body) // TODO limit and format markdown
+		case "MemberEvent":
+			fmt.Printf("%v %v %v to %v\n", e.FormatActor(), format(e.Payload.Action), e.Payload.Member.Login, e.Repo.Name)
 		case "PullRequestEvent":
 			fmt.Printf("%v %v pull request %v \"%v\" on %v\n", e.FormatActor(), format(e.Payload.Action), e.Payload.PullRequest.Number, faint(e.Payload.PullRequest.Title), e.Repo.Name)
 		case "PushEvent":
@@ -113,6 +121,7 @@ func faint(s string) string {
 
 func format(s string) string {
 	color := map[string]string{
+		"added":     "4",
 		"closed":    "1",
 		"commented": "9",
 		"created":   "4",
