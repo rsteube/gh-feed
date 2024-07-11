@@ -3,13 +3,13 @@ module github.com/rsteube/gh-feed
 go 1.21
 
 require (
-	github.com/charmbracelet/lipgloss v0.10.1-0.20240413172830-d0be07ea6b9c
+	github.com/charmbracelet/lipgloss v0.11.1
 	github.com/cli/go-gh/v2 v2.9.0
 )
 
 require (
 	github.com/aymanbagabas/go-osc52/v2 v2.0.1 // indirect
-	github.com/charmbracelet/x/exp/term v0.0.0-20240425164147-ba2a9512b05f // indirect
+	github.com/charmbracelet/x/ansi v0.1.3 // indirect
 	github.com/cli/safeexec v1.0.0 // indirect
 	github.com/cli/shurcooL-graphql v0.0.4 // indirect
 	github.com/henvic/httpretty v0.0.6 // indirect
