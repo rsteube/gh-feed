@@ -3,7 +3,7 @@ module github.com/rsteube/gh-feed
 go 1.21
 
 require (
-	github.com/charmbracelet/lipgloss v0.12.1
+	github.com/charmbracelet/lipgloss v0.13.0
 	github.com/cli/go-gh/v2 v2.9.0
 )
 
