@@ -4,8 +4,8 @@ github.com/charmbracelet/lipgloss v0.13.0 h1:4X3PPeoWEDCMvzDvGmTajSyYPcZM4+y8sCA
 github.com/charmbracelet/lipgloss v0.13.0/go.mod h1:nw4zy0SBX/F/eAO1cWdcvy6qnkDUxr8Lw7dvFrAIbbY=
 github.com/charmbracelet/x/ansi v0.1.4 h1:IEU3D6+dWwPSgZ6HBH+v6oUuZ/nVawMiWj5831KfiLM=
 github.com/charmbracelet/x/ansi v0.1.4/go.mod h1:dk73KoMTT5AX5BsX0KrqhsTqAnhZZoCBjs7dGWp4Ktw=
-github.com/cli/go-gh/v2 v2.9.0 h1:D3lTjEneMYl54M+WjZ+kRPrR5CEJ5BHS05isBPOV3LI=
-github.com/cli/go-gh/v2 v2.9.0/go.mod h1:MeRoKzXff3ygHu7zP+NVTT+imcHW6p3tpuxHAzRM2xE=
+github.com/cli/go-gh/v2 v2.10.0 h1:GMflBKoErBXlLvN2euxzL+p7JaM8erlSmw0cT7uZr7M=
+github.com/cli/go-gh/v2 v2.10.0/go.mod h1:MeRoKzXff3ygHu7zP+NVTT+imcHW6p3tpuxHAzRM2xE=
 github.com/cli/safeexec v1.0.0 h1:0VngyaIyqACHdcMNWfo6+KdUYnqEr2Sg+bSP1pdF+dI=
 github.com/cli/safeexec v1.0.0/go.mod h1:Z/D4tTN8Vs5gXYHDCbaM1S/anmEDnJb1iW0+EJ5zx3Q=
 github.com/cli/shurcooL-graphql v0.0.4 h1:6MogPnQJLjKkaXPyGqPRXOI2qCsQdqNfUY1QSJu2GuY=
