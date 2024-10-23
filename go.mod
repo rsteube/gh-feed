@@ -4,7 +4,7 @@ go 1.21
 
 require (
 	github.com/charmbracelet/lipgloss v0.13.1
-	github.com/cli/go-gh/v2 v2.10.0
+	github.com/cli/go-gh/v2 v2.11.0
 )
 
 require (
